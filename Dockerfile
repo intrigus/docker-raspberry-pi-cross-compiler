@@ -44,6 +44,9 @@ RUN curl -Ls https://github.com/sdhibit/docker-rpi-raspbian/raw/master/raspbian.
  && chroot $SYSROOT $QEMU_PATH /bin/sh -c '\
         echo "deb http://archive.raspbian.org/raspbian jessie firmware" \
             >> /etc/apt/sources.list \
+        && sudo echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" | tee /etc/apt/sources.list.d/webupd8team-java.list \
+        && sudo echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" | tee -a /etc/apt/sources.list.d/webupd8team-java.list \
+        && sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys EEA14886 \
         && apt-get update \
         && DEBIAN_FRONTEND=noninteractive apt-get install -y apt-utils \
         && DEBIAN_FRONTEND=noninteractive dpkg-reconfigure apt-utils \
@@ -51,6 +54,11 @@ RUN curl -Ls https://github.com/sdhibit/docker-rpi-raspbian/raw/master/raspbian.
         && DEBIAN_FRONTEND=noninteractive apt-get install -y \
                 libc6-dev \
                 symlinks \
+                oracle-java8-installer \
+                oracle-java8-set-default \
+                ant \
+                xorg-dev \
+                libgtk-3-dev \
         && symlinks -cors /'
 
 COPY image/ /
