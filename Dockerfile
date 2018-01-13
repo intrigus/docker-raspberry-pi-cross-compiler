@@ -53,12 +53,12 @@ RUN curl -Ls https://github.com/sdhibit/docker-rpi-raspbian/raw/master/raspbian.
         && DEBIAN_FRONTEND=noninteractive apt-get upgrade -y \
         && DEBIAN_FRONTEND=noninteractive apt-get install -y \
                 libc6-dev \
-                symlinks \
+ #               symlinks \
                 oracle-java8-installer \
                 oracle-java8-set-default \
-                ant \
-                xorg-dev \
-                libgtk-3-dev \
+ #               ant \
+ #               xorg-dev \
+ #               libgtk-3-dev \
         && symlinks -cors /'
 
 COPY image/ /
