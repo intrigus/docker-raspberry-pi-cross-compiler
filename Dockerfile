@@ -1,6 +1,11 @@
 FROM debian:jessie
 
-RUN apt-get update \
+RUN apt-get update \ 
+ && DEBIAN_FRONTEND=noninteractive apt-get install -y apt-utils \
+       debconf-utils \ 
+ && DEBIAN_FRONTEND=noninteractive dpkg-reconfigure apt-utils \
+ 
+ ### Install JAVA 8
  && echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" \
  | tee /etc/apt/sources.list.d/webupd8team-java.list \
  && echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" \
@@ -8,9 +13,9 @@ RUN apt-get update \
  && apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys EEA14886 \
  && echo debconf shared/accepted-oracle-license-v1-1 select true | debconf-set-selections \
  && echo debconf shared/accepted-oracle-license-v1-1 seen true | debconf-set-selections \
- && DEBIAN_FRONTEND=noninteractive apt-get update -y \       
- && DEBIAN_FRONTEND=noninteractive apt-get install -y apt-utils \
- && DEBIAN_FRONTEND=noninteractive dpkg-reconfigure apt-utils \
+ && DEBIAN_FRONTEND=noninteractive apt-get update -y \
+ ### END Install JAVA8
+ 
  && DEBIAN_FRONTEND=noninteractive apt-get install -y \
         automake \
         cmake \
