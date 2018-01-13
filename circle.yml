@@ -13,9 +13,9 @@ dependencies:
     - docker run --rm $RPXC_IMAGE > $RPXC_SCRIPT
     - chmod +x $RPXC_SCRIPT
 
-test:
-  override:
-    - ./example/run-example.sh ./example/axel
+#test:
+#  override:
+#    - ./example/run-example.sh ./example/axel
 
 deployment:
   hub:
