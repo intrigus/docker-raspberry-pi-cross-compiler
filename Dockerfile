@@ -1,6 +1,12 @@
 FROM debian:jessie
 
 RUN apt-get update \
+ && echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" \
+ | tee /etc/apt/sources.list.d/webupd8team-java.list \
+ && echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" \
+ | tee -a /etc/apt/sources.list.d/webupd8team-java.list \
+ && apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys EEA14886 \
+ && DEBIAN_FRONTEND=noninteractive apt-get update -y \       
  && DEBIAN_FRONTEND=noninteractive apt-get install -y apt-utils \
  && DEBIAN_FRONTEND=noninteractive dpkg-reconfigure apt-utils \
  && DEBIAN_FRONTEND=noninteractive apt-get install -y \
@@ -12,6 +18,9 @@ RUN apt-get update \
         git \
         make \
         runit \
+        oracle-java8-installer \
+        oracle-java8-set-default \
+        ant \
         sudo \
         xz-utils
 
@@ -44,21 +53,15 @@ RUN curl -Ls https://github.com/sdhibit/docker-rpi-raspbian/raw/master/raspbian.
  && chroot $SYSROOT $QEMU_PATH /bin/sh -c '\
         echo "deb http://archive.raspbian.org/raspbian jessie firmware" \
             >> /etc/apt/sources.list \
-        && echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" | tee /etc/apt/sources.list.d/webupd8team-java.list \
-        && echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" | tee -a /etc/apt/sources.list.d/webupd8team-java.list \
-        && apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys EEA14886 \
         && apt-get update \
         && DEBIAN_FRONTEND=noninteractive apt-get install -y apt-utils \
         && DEBIAN_FRONTEND=noninteractive dpkg-reconfigure apt-utils \
         && DEBIAN_FRONTEND=noninteractive apt-get upgrade -y \
         && DEBIAN_FRONTEND=noninteractive apt-get install -y \
                 libc6-dev \
- #               symlinks \
-                oracle-java8-installer \
-                oracle-java8-set-default \
- #               ant \
- #               xorg-dev \
- #               libgtk-3-dev \
+                symlinks \
+                xorg-dev \
+                libgtk-3-dev \
         && symlinks -cors /'
 
 COPY image/ /
