@@ -11,8 +11,8 @@ RUN apt-get update \
  && echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" \
  | tee -a /etc/apt/sources.list.d/webupd8team-java.list \
  && apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys EEA14886 \
- && echo debconf shared/accepted-oracle-license-v1-1 select true | debconf-set-selections \
- && echo debconf shared/accepted-oracle-license-v1-1 seen true | debconf-set-selections \
+ && echo debconf shared/accepted-oracle-license-v1-1 select true | sudo debconf-set-selections \
+ && echo debconf shared/accepted-oracle-license-v1-1 seen true | sudo debconf-set-selections \
  && DEBIAN_FRONTEND=noninteractive apt-get update -y \
  ### END Install JAVA8
  
