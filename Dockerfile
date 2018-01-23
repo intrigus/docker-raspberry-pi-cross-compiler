@@ -21,6 +21,7 @@ RUN apt-get update \
         curl \
         fakeroot \
         g++ \
+        pkg-config \
         git \
         make \
         runit \
