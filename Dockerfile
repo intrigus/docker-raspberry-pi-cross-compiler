@@ -69,6 +69,10 @@ RUN curl -Ls https://github.com/sdhibit/docker-rpi-raspbian/raw/master/raspbian.
                 symlinks \
                 xorg-dev \
                 libgtk-3-dev \
+                libxrandr-dev \
+                libxinerama-dev \
+                libxcursor-dev \
+                libxi-dev \
         && symlinks -cors /'
 
 COPY image/ /
