@@ -66,6 +66,7 @@ RUN curl -Ls https://github.com/sdhibit/docker-rpi-raspbian/raw/master/raspbian.
         && DEBIAN_FRONTEND=noninteractive apt-get upgrade -y \
         && DEBIAN_FRONTEND=noninteractive apt-get install -y \
                 libc6-dev \
+                build-essentials \
                 symlinks \
                 xorg-dev \
                 libgtk-3-dev \
