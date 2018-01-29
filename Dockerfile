@@ -78,6 +78,7 @@ RUN curl -Ls https://github.com/sdhibit/docker-rpi-raspbian/raw/master/raspbian.
                 portaudio19-dev \
                 libasound2-dev \
                 libjack-dev \
+                libraspberrypi-dev \
         && symlinks -cors /'
 
 COPY image/ /
